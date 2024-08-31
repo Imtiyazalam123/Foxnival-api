@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-subscriber.yaml
+  - include:
+      file: db/changelog/db.changelog-user.yaml
+  - include:
+      file: db/changelog/db.changelog-usernameInfo.yaml

@@ -3,3 +3,15 @@ server:
 spring:
   application:
     name: foxnival-api
+  datasource:
+    url: jdbc:mysql://foxnival-dev-db.mysql.database.azure.com:3306/foxnival
+    username: imtiyaz123
+    password: Foxnival@123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml

@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: "Creating_user_table"
+      author: imtiyaj
+      changes:
+        - createTable:
+            tableName: USER
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: SUBSCRIBER_ID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_subscriber_id
+                    references: SUBSCRIBER(ID)
+              - column:
+                  name: FULL_NAME
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ACTIVE
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ROLE
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: CREATED_DATE
+                  type: datetime
+              - column:
+                  name: LAST_MODIFIED_DATE
+                  type: datetime
