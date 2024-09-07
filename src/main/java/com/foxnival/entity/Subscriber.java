@@ -27,6 +27,9 @@ public class Subscriber {
     @Column(name = "ACTIVE", nullable = false)
     private Boolean active;
 
+    @Column(name = "PLANE_FOR_YEAR", nullable = false)
+    private String planForYear;
+
     @Column(name = "SUBSCRIBED_DATE", nullable = false)
     private Instant subscribedDate;
 

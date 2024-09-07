@@ -30,7 +30,7 @@ public class User {
     private Boolean active = true;
 
     @Column(name = "ROLE", nullable = false)
-    private Role role;
+    private String role;
 
     @Column(name = "CREATED_DATE")
     private Instant createdDate;

@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: "Creating_paymentDetails_table"
+      author: Imtiyaj
+      changes:
+        - createTable:
+            tableName: PAYMENT_DETAILS
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: USER_ID
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_paymentUser_id
+                    references: USER(ID)
+              - column:
+                  name: ORDER_ID
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PAYMENT_STATUS
+                  type: varchar(100)
+              - column:
+                  name: PAYMENT_ID
+                  type: varchar(100)
+              - column:
+                  name: PAYMENT_SIGNATURE
+                  type: varchar(100)
+              - column:
+                  name: ERROR_CODE
+                  type: varchar(100)
+              - column:
+                  name: FAILED_REASON
+                  type: varchar(100)
+              - column:
+                  name: FAILED_AT_STEP
+                  type: varchar(100)
+              - column:
+                  name: FAILED_SOURCE
+                  type: varchar(100)
+              - column:
+                  name: FAILED_DESCRIPTION
+                  type: varchar(100)
+              - column:
+                  name: CREATED_DATE
+                  type: datetime
+              - column:
+                  name: LAST_MODIFIED_DATE
+                  type: datetime

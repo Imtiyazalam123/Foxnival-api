@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db/changelog/db.changelog-user.yaml
   - include:
       file: db/changelog/db.changelog-usernameInfo.yaml
+  - include:
+      file: db/changelog/db.changelog-paymentDetails.yaml

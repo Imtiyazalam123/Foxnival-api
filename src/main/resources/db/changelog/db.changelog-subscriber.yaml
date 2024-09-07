@@ -19,6 +19,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: PLANE_FOR_YEAR
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
                   name: ACTIVE
                   type: boolean
                   constraints:

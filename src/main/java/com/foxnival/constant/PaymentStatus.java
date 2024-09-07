@@ -4,14 +4,17 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-public enum Role {
+public enum PaymentStatus {
 
-    OWNER("owner");
+    SUCCESS("success"),
+
+    FAILED("failed");
 
     @JsonValue
-    private String roleName;
+    private String paymentStatus;
 }
