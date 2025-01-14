@@ -15,8 +15,6 @@ public class SubscribeDetail {
 
     private User user;
 
-    private UsernameInfo usernameInfo;
-
     private PaymentDetails paymentDetails;
 
     private boolean isMailSend;

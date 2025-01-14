@@ -4,6 +4,9 @@ spring:
   application:
     name: foxnival-api
   datasource:
+    #    url: jdbc:mysql://localhost:3306/foxnival
+    #    username: imtiyaj
+    #    password: Imtiyaz@123
     url: jdbc:mysql://foxnival-dev-db.mysql.database.azure.com:3306/foxnival
     username: imtiyaz123
     password: Foxnival@123
@@ -12,9 +15,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yaml
 
   mail:
     host: smtp.gmail.com

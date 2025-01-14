@@ -1,6 +1,9 @@
 package com.foxnival.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.foxnival.constant.Role;
+import com.foxnival.view.Views;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
+    @JsonView(Views.User.class)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,18 +28,30 @@ public class User {
     private Subscriber subscriber;
 
     @Column(name = "FULL_NAME", nullable = false)
+    @JsonView(Views.User.class)
     private String name;
 
-    @Column(name = "ACTIVE", nullable = false)
-    private Boolean active = true;
+    @Column(name = "USERNAME", nullable = false, unique = true)
+    @JsonView(Views.User.class)
+    private String username;
+
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
+
+    @Column(name = "ACTIVE", nullable = false, columnDefinition = "TINYINT(1)")
+    @JsonView(Views.User.class)
+    private boolean active = true;
 
     @Column(name = "ROLE", nullable = false)
+    @JsonView(Views.User.class)
     private String role;
 
     @Column(name = "CREATED_DATE")
+    @JsonView(Views.User.class)
     private Instant createdDate;
 
     @Column(name = "LAST_MODIFIED_DATE")
+    @JsonView(Views.User.class)
     private Instant lastModifiedDate;
 
     @PrePersist

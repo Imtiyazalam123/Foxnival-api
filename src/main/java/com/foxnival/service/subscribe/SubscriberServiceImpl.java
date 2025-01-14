@@ -7,7 +7,6 @@ import com.foxnival.mapper.PaymentDetailsMapper;
 import com.foxnival.repository.PaymentDetailsRepository;
 import com.foxnival.repository.SubscribeRepository;
 import com.foxnival.repository.UserRepository;
-import com.foxnival.repository.UsernameRepository;
 import com.foxnival.service.message.EmailService;
 import com.foxnival.util.CalculateValidity;
 import jakarta.transaction.Transactional;
@@ -25,9 +24,6 @@ public class SubscriberServiceImpl implements SubscriberService{
 
     @Autowired
     private CalculateValidity calculateValidity;
-
-    @Autowired
-    private UsernameRepository usernameRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -60,6 +56,8 @@ public class SubscriberServiceImpl implements SubscriberService{
         User user = new User();
         user.setSubscriber(savedSubscriber);
         user.setName(subscribeDetailDto.getName());
+        user.setUsername(subscribeDetailDto.getUsername());
+        user.setPassword(subscribeDetailDto.getPassword());
         user.setRole(subscribeDetailDto.getRole().getRoleName());
         user.setActive(true);
 
@@ -75,24 +73,13 @@ public class SubscriberServiceImpl implements SubscriberService{
             throw new DataInsertionFailedException("Failed to save paymentDetails");
         }
 
-        UsernameInfo usernameInfo = new UsernameInfo();
-        usernameInfo.setUser(savedUser);
-        usernameInfo.setActive(true);
-        usernameInfo.setUsername(subscribeDetailDto.getUsername());
-        usernameInfo.setPassword(subscribeDetailDto.getPassword());
-
-        UsernameInfo savedUsername = usernameRepository.save(usernameInfo);
-        if(savedUsername == null) {
-            throw new DataInsertionFailedException("Failed to create default login user");
-        }
 
         SubscribeDetail subscribeDetail = new SubscribeDetail();
         subscribeDetail.setSubscriber(savedSubscriber);
         subscribeDetail.setUser(savedUser);
-        subscribeDetail.setUsernameInfo(savedUsername);
         subscribeDetail.setPaymentDetails(savedPaymentDetails);
 
-        boolean isMailSend = emailService.sendEmail(savedUsername.getUsername(), savedUser.getName(), savedUsername.getPassword());
+        boolean isMailSend = emailService.sendEmail(savedUser.getUsername(), savedUser.getName(), savedUser.getPassword());
 
         subscribeDetail.setMailSend(isMailSend);
 

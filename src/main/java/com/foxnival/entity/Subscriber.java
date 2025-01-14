@@ -24,8 +24,8 @@ public class Subscriber {
     @Column(name = "ORGANIZATION_NAME", nullable = false)
     private String organizationName;
 
-    @Column(name = "ACTIVE", nullable = false)
-    private Boolean active;
+    @Column(name = "ACTIVE", nullable = false, columnDefinition = "TINYINT(1)")
+    private boolean active;
 
     @Column(name = "PLANE_FOR_YEAR", nullable = false)
     private String planForYear;
