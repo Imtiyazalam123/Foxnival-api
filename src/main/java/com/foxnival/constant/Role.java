@@ -10,7 +10,13 @@ import lombok.NoArgsConstructor;
 @Getter
 public enum Role {
 
-    OWNER("owner");
+    OWNER("owner"),
+    MANAGER("manager"),
+    RECEPTIONIST("receptionist"),
+    TELECALLER("telecaller"),
+    HR("hr"),
+    SALES_REPRESENTATIVE("sales_representative");
+
 
     @JsonValue
     private String roleName;
