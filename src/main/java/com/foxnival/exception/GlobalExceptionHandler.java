@@ -19,4 +19,15 @@ public class GlobalExceptionHandler {
         errorResponse.setErrorMessage(e.getMessage());
         return errorResponse;
     }
+
+    @ExceptionHandler(InvalidRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleInvalidRequestException(InvalidRequestException e) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setStatusCode(HttpStatus.BAD_REQUEST.value());
+        errorResponse.setHttpStatus(HttpStatus.BAD_REQUEST);
+        errorResponse.setErrorMessage(e.getMessage());
+        return errorResponse;
+    }
 }
