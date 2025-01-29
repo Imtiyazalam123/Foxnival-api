@@ -1,11 +1,13 @@
 package com.foxnival.controller.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.foxnival.dto.UserDetailsDto;
 import com.foxnival.dto.UserDto;
 import com.foxnival.entity.User;
 import com.foxnival.service.user.UserService;
 import com.foxnival.view.Views;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,4 +93,20 @@ public class UserController {
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @Operation(summary = "Update user details and password",
+            description = "It will update user details and password",
+            responses = {
+                    @ApiResponse(description = "updated", responseCode = "201", content = @Content),
+                    @ApiResponse(description = "User not found.", responseCode = "400", content = @Content)
+            }
+    )
+    @PutMapping(path = "/updateUserDetails/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDetailsDto> updateUserDetails(
+            @Parameter(description = "User id.")
+            @PathVariable(name = "userId") Long userId,
+            @RequestBody UserDetailsDto userDetailsDto) {
+        return new ResponseEntity<>(userService.updateUserDetails(userId, userDetailsDto), HttpStatus.CREATED);
+    }
+
 }

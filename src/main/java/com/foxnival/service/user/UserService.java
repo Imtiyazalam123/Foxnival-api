@@ -1,5 +1,6 @@
 package com.foxnival.service.user;
 
+import com.foxnival.dto.UserDetailsDto;
 import com.foxnival.dto.UserDto;
 import com.foxnival.entity.User;
 
@@ -16,4 +17,6 @@ public interface UserService {
     List<User> getAllUsersBySubscriberId(Long subscriberId);
 
     void deleteUser(Long userId);
+
+    UserDetailsDto updateUserDetails(Long userId, UserDetailsDto userDetailsDto);
 }

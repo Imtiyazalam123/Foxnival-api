@@ -1,9 +1,11 @@
 package com.foxnival.service.user;
 
+import com.foxnival.dto.UserDetailsDto;
 import com.foxnival.dto.UserDto;
 import com.foxnival.entity.Subscriber;
 import com.foxnival.entity.User;
 import com.foxnival.exception.DataInsertionFailedException;
+import com.foxnival.exception.InvalidRequestException;
 import com.foxnival.repository.SubscribeRepository;
 import com.foxnival.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -75,6 +77,39 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public UserDetailsDto updateUserDetails(Long userId, UserDetailsDto userDetailsDto) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (!optionalUser.isPresent()) {
+            log.error("User not found for provided user id : " + userId);
+            throw new InvalidRequestException("User not found.");
+        }
+
+        User user = optionalUser.get();
+        user.setName(userDetailsDto.getName());
+        user.setMobile(userDetailsDto.getMobile());
+
+        if (userDetailsDto.isChangePassword()) {
+            if (user.getPassword().equals(userDetailsDto.getCurrentPassword().trim())) {
+                user.setPassword(userDetailsDto.getNewPassword());
+            } else {
+                log.error("Current password is wrong...");
+                throw new InvalidRequestException("Invalid current password.");
+            }
+        }
+
+        User updatedUser = userRepository.save(user);
+        UserDetailsDto updatedUserDetailsDto = new UserDetailsDto();
+        updatedUserDetailsDto.setName(updatedUser.getName());
+        updatedUserDetailsDto.setMobile(updatedUser.getMobile());
+        updatedUserDetailsDto.setUsername(updatedUser.getUsername());
+        updatedUserDetailsDto.setChangePassword(userDetailsDto.isChangePassword());
+        updatedUserDetailsDto.setCurrentPassword(updatedUser.getPassword());
+        updatedUserDetailsDto.setNewPassword(updatedUser.getPassword());
+
+        return updatedUserDetailsDto;
     }
 
 }
