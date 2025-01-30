@@ -112,4 +112,15 @@ public class UserServiceImpl implements UserService {
         return updatedUserDetailsDto;
     }
 
+    @Override
+    public User fetchUserById(Long userId) {
+
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (!optionalUser.isPresent()) {
+            log.error("User not found for provided user id: " + userId);
+            throw new InvalidRequestException("User not found.");
+        }
+        return optionalUser.get();
+    }
+
 }

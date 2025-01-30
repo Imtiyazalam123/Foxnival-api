@@ -109,4 +109,21 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUserDetails(userId, userDetailsDto), HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Fetch user details based on user id.",
+            description = "It will fetch the user details based on user id.",
+            responses = {
+                    @ApiResponse(description = "Successful.", responseCode = "200", content = @Content),
+                    @ApiResponse(description = "User not found.", responseCode = "400", content = @Content)
+            }
+    )
+    @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @JsonView(Views.UserWithSubscriber.class)
+    public ResponseEntity<User> getUserById(
+            @Parameter(description = "User id.")
+            @PathVariable(name = "userId") Long userId
+    ) {
+        return new ResponseEntity<>(userService.fetchUserById(userId), HttpStatus.OK);
+    }
+
+
 }
