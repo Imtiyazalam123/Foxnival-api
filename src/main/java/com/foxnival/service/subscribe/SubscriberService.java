@@ -7,4 +7,6 @@ import com.foxnival.entity.SubscribeDetail;
 public interface SubscriberService {
 
    public SubscribeDetail createSubscription(SubscribeDetailDto subscribeDetailDto);
+
+   void checkEmail(String email);
 }

@@ -1,11 +1,12 @@
 package com.foxnival.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.foxnival.constant.Role;
 import com.foxnival.view.Views;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -14,7 +15,6 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USER")
 public class User {
 
     @Id
@@ -24,7 +24,7 @@ public class User {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUBSCRIBER_ID", referencedColumnName = "ID" , nullable = false)
+    @JoinColumn(name = "SUBSCRIBER_ID", referencedColumnName = "ID", nullable = false)
     @JsonView({Views.UserWithSubscriber.class})
     private Subscriber subscriber;
 

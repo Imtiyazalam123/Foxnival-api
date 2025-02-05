@@ -16,6 +16,8 @@ public class SubscribeDetailDto {
 
     private String username;
 
+    private String mobile;
+
     private String password;
 
     private String organizationName;
