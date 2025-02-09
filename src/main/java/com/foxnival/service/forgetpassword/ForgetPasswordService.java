@@ -10,4 +10,6 @@ public interface ForgetPasswordService {
     boolean sendVerificationCode(String username);
 
     boolean verifyOtp(String username, String otp);
+
+    boolean resetPassword(String username, String newPassword);
 }

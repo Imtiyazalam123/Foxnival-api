@@ -50,4 +50,18 @@ public class ForgetPasswordServiceImpl implements ForgetPasswordService {
     public boolean verifyOtp(String username, String otp) {
         return otp.equals(otpStorage.get(username.trim()));
     }
+
+    @Override
+    public boolean resetPassword(String username, String newPassword) {
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.setPassword(newPassword);
+            userRepository.save(user);
+            return true;
+        } else {
+            throw new InvalidRequestException("Email/Username not found.");
+        }
+    }
+
 }

@@ -48,4 +48,22 @@ public class ForgetPasswordController {
     ) {
         return forgetPasswordService.verifyOtp(username, otp);
     }
+
+    @Operation(summary = "Rest the password for specific email/user",
+            description = "It will Rest the password for specific email/user",
+            responses = {
+                    @ApiResponse(description = "verified.", responseCode = "200", content = @Content),
+                    @ApiResponse(description = "Invalid username/email", responseCode = "400", content = @Content)
+            }
+    )
+
+    @PutMapping(path = "/resetPassword/{username}/password/{password}")
+    public boolean restPassword(
+            @Parameter(description = "Username")
+            @PathVariable(name = "username") String username,
+            @Parameter(description = "new password.")
+            @PathVariable(name = "password") String newPassword
+    ) {
+        return forgetPasswordService.resetPassword(username, newPassword);
+    }
 }
