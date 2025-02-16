@@ -11,7 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Message {
 
-    private String senderUsername;
-    private String receiverUsername;
-    private String content ;
+    private Integer senderId;
+    private Integer receiverId;
+    private String text;
+    private String timestamp;
 }

@@ -19,7 +19,7 @@ public class MessagingController {
 
     @MessageMapping("/send-private-message")
     public Message sendMessage(@Payload Message message) {
-        simpMessagingTemplate.convertAndSendToUser(message.getSenderUsername(), "/private", message);
+        simpMessagingTemplate.convertAndSendToUser(message.getReceiverId()+"", "/private", message);
         return message;
     }
 }
